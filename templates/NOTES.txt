@@ -1,0 +1,3 @@
+Try 
+$ kubectl get issuers --namespace <foo>
+$ kubectl get clusterissuers
