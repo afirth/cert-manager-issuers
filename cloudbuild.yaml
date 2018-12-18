@@ -1,0 +1,29 @@
+steps:
+- name: gcr.io/cloud-builders/git
+  id: fetch-tags
+  args: [fetch, --depth=100]
+
+- name: 'gcr.io/${PROJECT_ID}/helm'
+  id: package
+  entrypoint: 'bash'
+  args:
+  - './helm-package.bash'
+
+- name: 'gcr.io/cloud-builders/go:debian'
+  id: release
+  entrypoint: 'make'
+  args:
+  - 'deps'
+  - 'release'
+  dir: '/workspace'
+  env:
+  - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
+  - 'GITHUB_REPO=${_GITHUB_REPO}' #specify as a GCB substitution
+  secretEnv:
+  - 'GITHUB_TOKEN'
+
+secrets:
+# - kmsKeyName: projects/${PROJECT_ID}/locations/global/keyRings/${PROJECT_ID}/cryptoKeys/cloudbuild
+- kmsKeyName: projects/flying-blue-mantis/locations/global/keyRings/flying-blue-mantis/cryptoKeys/cloudbuild
+  secretEnv:
+    GITHUB_TOKEN: CiQA7J4wCQjxDPi/CpckwurLwS+7SIF7/RmhNxZWwei9voaMsK4SUQCQvfKNybVsrtJdOWDvGUn0o1XZ5iZLonw9ASkQW+V1s/NHlSfGfjsHDpjrx43CldNm0t6YcrMxhACki0M+MhFMc6y7ky4DCxUFF4ffQUEidg==

@@ -6,9 +6,9 @@ email: "you@example.com"
 
 issuers:
   - kind: ClusterIssuer
-    # optional override
+    # optional override, otherwise values.email is used
     # email: "you@example.com"
     name: lets-encrypt-staging
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    method: 
+    method:
       http01: {}
