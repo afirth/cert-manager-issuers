@@ -1,9 +1,14 @@
 steps:
 - name: 'gcr.io/${PROJECT_ID}/helm'
+  entrypoint: 'bash'
+  args: 
+  - './helm-release.bash'
+
+- name: 'gcr.io/gcr.io/cloud-builders/go'
   entrypoint: 'make'
   args: 
   - 'deps'
-  - 'dist'
+  - 'release'
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
   - 'GITHUB_REPO=${_GITHUB_REPO}' #specify as a GCB substitution
