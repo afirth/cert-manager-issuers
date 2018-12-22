@@ -10,7 +10,8 @@ steps:
   entrypoint: 'bash'
   args:
   - '-c'
-  - 'make --version'
+  - 'make deps'
+  dir: '/workspace'
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
   - 'GITHUB_REPO=${_GITHUB_REPO}' #specify as a GCB substitution
