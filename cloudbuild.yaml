@@ -21,6 +21,6 @@ steps:
   - 'GITHUB_TOKEN'
 
 secrets:
-- kmsKeyName: projects/$PROJECT_ID/locations/global/keyRings/$PROJECT_ID/cryptoKeys/cloudbuild
+- kmsKeyName: projects/${PROJECT_ID}/locations/global/keyRings/${PROJECT_ID}/cryptoKeys/cloudbuild
   secretEnv:
     GITHUB_TOKEN: CiQA7J4wCQjxDPi/CpckwurLwS+7SIF7/RmhNxZWwei9voaMsK4SUQCQvfKNybVsrtJdOWDvGUn0o1XZ5iZLonw9ASkQW+V1s/NHlSfGfjsHDpjrx43CldNm0t6YcrMxhACki0M+MhFMc6y7ky4DCxUFF4ffQUEidg==
