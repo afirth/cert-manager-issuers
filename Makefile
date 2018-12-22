@@ -1,11 +1,15 @@
 # @afirth 2018-12
+# checks Chart.yaml for a version, and uploads a release to github
+# GITHUB_USER, GITHUB_TOKEN, and GITHUB_REPO must be set
+# see also https://github.com/c4milo/github-release
+# optimised for gcr.io/cloud-builders/go:alpine
 
 .SHELLFLAGS := -eux -o pipefail -c
 MAKEFLAGS += --warn-undefined-variables
 SHELL=/bin/bash
 .SUFFIXES:
 
-NAME := afirth/cert-manager-issuers
+NAME := $(GITHUB_USER)/$(GITHUB_REPO)
 VERSION := $(shell helm inspect chart ./ | perl -ne 'print if s/.*version: (v[\d.]+.*)/$1/')
 
 
