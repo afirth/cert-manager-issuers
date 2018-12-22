@@ -4,19 +4,16 @@
 # see also https://github.com/c4milo/github-release
 # optimised for gcr.io/cloud-builders/go
 
-.SHELLFLAGS := -eux -o pipefail -c
+.SHELLFLAGS := -eux -o pipefail
 MAKEFLAGS += --warn-undefined-variables
 SHELL=/bin/bash
 .SUFFIXES:
 
 NAME := $(GITHUB_USER)/$(GITHUB_REPO)
-VERSION := $(shell helm inspect chart ./ | perl -ne 'print if s/.*version: (v[\d.]+.*)/$1/')
-
+VERSION := $(shell cat VERSION)
 
 dist:
-	rm -rf dist && mkdir dist
-	helm package --save=false -d dist/ ./
-	cd $(shell pwd)/dist && find . -name '*.tgz' -type f | xargs -I % sh -c 'shasum -a 512 % > $$(basename % .tgz).sha512'
+	./helm-package.bash
 
 release: dist
 	@latest_tag=$$(git describe --tags `git rev-list --tags --max-count=1`); \
