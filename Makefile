@@ -6,7 +6,6 @@
 
 .SHELLFLAGS := -eux -o pipefail
 MAKEFLAGS += --warn-undefined-variables
-SHELL=bash
 .SUFFIXES:
 
 NAME := $(GITHUB_USER)/$(GITHUB_REPO)
