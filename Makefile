@@ -10,6 +10,7 @@ SHELL=/bin/bash
 .SUFFIXES:
 
 NAME := $(GITHUB_USER)/$(GITHUB_REPO)
+foo := $(shell ls)
 VERSION := $(shell cat VERSION)
 
 dist:
