@@ -1,19 +1,12 @@
 steps:
 - name: 'gcr.io/cloud-builders/go:debian'
-  entrypoint: 'env'
+  entrypoint: 'make'
+  args: 
+  - 'deps'
+  - 'dist'
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
-  - 'GITHUB_REPO=${REPO_NAME}'
-
-- name: 'gcr.io/cloud-builders/go:debian'
-  entrypoint: 'bash'
-  args: [
-    'make',
-    'deps dist'
-    ]
-  env:
-  - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
-  - 'GITHUB_REPO=${REPO_NAME}'
+  - 'GITHUB_REPO=${_GITHUB_REPO}' #specify as a GCB substitution
   secretEnv:
   - 'GITHUB_TOKEN'
 
