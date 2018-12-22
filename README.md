@@ -6,7 +6,7 @@ Due to technical limitations of helm v2, custom resource definitions must be cre
 
 ## Quickstart
 
-``` 
+```
 $ helm repo add github-cert-manager-issuers 'https://raw.githubusercontent.com/afirth/cert-manager-issuers/master/'
 $ helm install cert-manager-issuers
 ```

@@ -2,13 +2,13 @@ steps:
 - name: 'gcr.io/${PROJECT_ID}/helm'
   id: package
   entrypoint: 'bash'
-  args: 
+  args:
   - './helm-package.bash'
 
-  - name: 'gcr.io/cloud-builders/go:debian'
+- name: 'gcr.io/cloud-builders/go:debian'
   id: release
   entrypoint: 'make'
-  args: 
+  args:
   - 'deps'
   - 'release'
   env:
