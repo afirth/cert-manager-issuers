@@ -5,7 +5,7 @@ steps:
   args: 
   - './helm-package.bash'
 
-- name: 'gcr.io/gcr.io/cloud-builders/go'
+- name: 'gcr.io/cloud-builders/go'
   id: release
   entrypoint: 'make'
   args: 
