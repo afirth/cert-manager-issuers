@@ -18,6 +18,10 @@ $HELM_REPO_NAME=github-cert-manager-issuers
 $HELM_REPO_URL=https://raw.githubusercontent.com/afirth/cert-manager-issuers/master/
 ```
 
+## TODO
+
+move this to a `charts` repo and host the repo on github pages, or get it into incubator
+
 ## Contributing
 
 PRs are welcome.
