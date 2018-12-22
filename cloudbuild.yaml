@@ -1,14 +1,11 @@
 steps:
-- name: 'gcr.io/cloud-builders/go:alpine'
-  entrypoint: 'bash'
-  args: [
-    'env'
-    ]
+- name: 'gcr.io/cloud-builders/go:debian'
+  entrypoint: 'env'
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
   - 'GITHUB_REPO=${REPO_NAME}'
 
-- name: 'gcr.io/cloud-builders/go:alpine'
+- name: 'gcr.io/cloud-builders/go:debian'
   entrypoint: 'bash'
   args: [
     'make',

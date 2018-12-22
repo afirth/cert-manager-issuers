@@ -2,7 +2,7 @@
 # checks Chart.yaml for a version, and uploads a release to github
 # GITHUB_USER, GITHUB_TOKEN, and GITHUB_REPO must be set
 # see also https://github.com/c4milo/github-release
-# optimised for gcr.io/cloud-builders/go:alpine
+# optimised for gcr.io/cloud-builders/go
 
 .SHELLFLAGS := -eux -o pipefail -c
 MAKEFLAGS += --warn-undefined-variables
