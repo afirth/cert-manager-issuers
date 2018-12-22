@@ -2,16 +2,24 @@ steps:
 - name: 'gcr.io/cloud-builders/go:alpine'
   entrypoint: 'bash'
   args: [
-    'env', '&&',
+    'env'
+    ]
+  env:
+  - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
+  - 'GITHUB_REPO=${REPO_NAME}'
+
+- name: 'gcr.io/cloud-builders/go:alpine'
+  entrypoint: 'bash'
+  args: [
     'make',
     'deps dist'
     ]
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
   - 'GITHUB_REPO=${REPO_NAME}'
-  # secretEnv:
-  # - 'GITHUB_TOKEN'
-    
+  secretEnv:
+  - 'GITHUB_TOKEN'
+
 secrets:
 - kmsKeyName: projects/$PROJECT_ID/locations/global/keyRings/$PROJECT_ID/cryptoKeys/cloudbuild
   secretEnv:
