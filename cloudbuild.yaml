@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/cloud-builders/go:debian'
+- name: 'gcr.io/${PROJECT_ID}/helm'
   entrypoint: 'make'
   args: 
   - 'deps'
