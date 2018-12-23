@@ -4,7 +4,7 @@
 # see also https://github.com/c4milo/github-release
 # optimised for gcr.io/cloud-builders/go
 
-.SHELLFLAGS := -eux -o pipefail
+.SHELLFLAGS := -eux -o pipefail -c
 MAKEFLAGS += --warn-undefined-variables
 SHELL=/bin/bash
 .SUFFIXES:
@@ -24,6 +24,7 @@ release: dist
 	git pull
 
 deps:
+	echo foo
 	go get github.com/c4milo/github-release
 
 .PHONY: deps dist release

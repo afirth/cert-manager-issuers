@@ -1,16 +1,16 @@
 steps:
-- name: 'gcr.io/${PROJECT_ID}/helm'
-  id: package
-  entrypoint: 'bash'
-  args:
-  - './helm-package.bash'
+# - name: 'gcr.io/${PROJECT_ID}/helm'
+  # id: package
+  # entrypoint: 'bash'
+  # args:
+  # - './helm-package.bash'
 
 - name: 'gcr.io/cloud-builders/go:debian'
   id: release
   entrypoint: 'bash'
   args:
   - '-c'
-  - 'cd /workspace && make deps release'
+  - 'cd /workspace && ls -lah && make deps release'
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
   - 'GITHUB_REPO=${_GITHUB_REPO}' #specify as a GCB substitution
