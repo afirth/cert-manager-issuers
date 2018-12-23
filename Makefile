@@ -2,7 +2,7 @@
 # checks Chart.yaml for a version, and uploads a release to github
 # GITHUB_USER, GITHUB_TOKEN, and GITHUB_REPO must be set
 # see also https://github.com/c4milo/github-release
-# optimised for gcr.io/cloud-builders/go
+# optimised for gcr.io/cloud-builders/go:debian
 
 .SHELLFLAGS := -eux -o pipefail -c
 MAKEFLAGS += --warn-undefined-variables
@@ -12,12 +12,16 @@ SHELL=/bin/bash
 NAME := $(GITHUB_USER)/$(GITHUB_REPO)
 VERSION := $(shell cat VERSION)
 
+all: dist release
+
+#dist creates VERSION
 dist:
 	./helm-package.bash
 
-release: dist
+release:
 	@latest_tag=$$(git describe --tags `git rev-list --tags --max-count=1`); \
 	comparison="$$latest_tag..HEAD"; \
+	version=$$(cat VERSION); \
 	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
 	changelog=$$(git log $$comparison --oneline --no-merges); \
 	github-release $(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
@@ -26,4 +30,4 @@ release: dist
 deps:
 	go get github.com/c4milo/github-release
 
-.PHONY: deps dist release
+.PHONY: all deps dist release
