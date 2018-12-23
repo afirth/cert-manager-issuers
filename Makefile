@@ -11,6 +11,7 @@ SHELL=/bin/bash
 
 NAME := $(GITHUB_USER)/$(GITHUB_REPO)
 VERSION := $(shell cat VERSION)
+loc := $(shell pwd)
 
 dist:
 	./helm-package.bash
@@ -24,6 +25,7 @@ release: dist
 	git pull
 
 deps:
+	echo $(loc)
 	go get github.com/c4milo/github-release
 
 .PHONY: deps dist release
