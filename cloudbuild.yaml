@@ -7,10 +7,10 @@ steps:
 
 - name: 'gcr.io/cloud-builders/go:debian'
   id: release
-  entrypoint: 'bash'
+  entrypoint: 'make'
   args:
-  - '-c'
-  - 'cd /workspace && ls -lah && make deps release'
+  - 'deps'
+  - 'release'
   env:
   - 'GITHUB_USER=${_GITHUB_USER}' #specify as a GCB substitution
   - 'GITHUB_REPO=${_GITHUB_REPO}' #specify as a GCB substitution

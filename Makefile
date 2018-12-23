@@ -24,7 +24,6 @@ release: dist
 	git pull
 
 deps:
-	echo foo
 	go get github.com/c4milo/github-release
 
 .PHONY: deps dist release
