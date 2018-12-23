@@ -12,7 +12,7 @@ SHELL=/bin/bash
 NAME := $(GITHUB_USER)/$(GITHUB_REPO)
 VERSION := $(shell cat VERSION)
 
-all: dist release
+all: dist release pull
 
 #dist creates VERSION
 dist:
@@ -25,6 +25,8 @@ release:
 	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
 	changelog=$$(git log $$comparison --oneline --no-merges); \
 	$$(go env GOPATH)/bin/github-release $(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
+
+pull:
 	git pull
 
 deps:
