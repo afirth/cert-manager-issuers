@@ -1,9 +1,9 @@
 steps:
-# - name: 'gcr.io/${PROJECT_ID}/helm'
-  # id: package
-  # entrypoint: 'bash'
-  # args:
-  # - './helm-package.bash'
+- name: 'gcr.io/${PROJECT_ID}/helm'
+  id: package
+  entrypoint: 'bash'
+  args:
+  - './helm-package.bash'
 
 - name: 'gcr.io/cloud-builders/go:debian'
   id: release
