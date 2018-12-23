@@ -24,10 +24,10 @@ release:
 	version=$$(cat VERSION); \
 	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
 	changelog=$$(git log $$comparison --oneline --no-merges); \
-	github-release $(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
+	$$(go env GOPATH)/bin/github-release $(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
 	git pull
 
 deps:
-	go get github.com/c4milo/github-release
+	go get -v github.com/c4milo/github-release
 
 .PHONY: all deps dist release
