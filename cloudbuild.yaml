@@ -1,4 +1,8 @@
 steps:
+- name: gcr.io/cloud-builders/git
+  id: fetch-tags
+  args: [fetch, --depth=100]
+
 - name: 'gcr.io/${PROJECT_ID}/helm'
   id: package
   entrypoint: 'bash'

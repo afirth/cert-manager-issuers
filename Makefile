@@ -19,7 +19,7 @@ dist:
 	./helm-package.bash
 
 release:
-	@latest_tag=$$(git describe --tags `git rev-list --tags --max-count=1`); \
+	@latest_tag=$$(git describe --tags `git rev-list --tags --max-count=1` || true); \
 	comparison="$$latest_tag..HEAD"; \
 	version=$$(cat VERSION); \
 	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
