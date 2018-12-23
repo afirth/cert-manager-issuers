@@ -1,3 +1,4 @@
 Try
-$ kubectl get issuers --namespace <foo>
 $ kubectl get clusterissuers
+or
+$ kubectl get issuers --namespace={{ $.Release.Namespace }}
