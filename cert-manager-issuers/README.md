@@ -1,27 +1,39 @@
-# cert-manager-issuers [WIP]
-
-## Why
-
-Due to technical limitations of helm v2, custom resource definitions must be created before a custom resource can be defined. This means that no issuers are included in the [cert-manager helm chart](https://github.com/helm/charts/tree/master/stable/cert-manager), as they would fail to create.
+# Cert-Manager-Issuers
 
 ## Quickstart
 
-```
-$ helm repo add github-cert-manager-issuers 'https://raw.githubusercontent.com/afirth/cert-manager-issuers/master/'
-$ helm install cert-manager-issuers
-```
+To setup the [letsencrypt](https://letsencrypt.org/) staging and prod http01 ACME endpoints as ClusterIssuers (so you can use the kube-lego style `kubernetes.io/tls-acme: "true"`):
 
-or if using cloudbuild or the helm docker builder: (https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/helm)
+First install the [cert-manager chart](https://github.com/helm/charts/tree/master/stable/cert-manager) with the ingress shim set up:
 
 ```
-$HELM_REPO_NAME=github-cert-manager-issuers
-$HELM_REPO_URL=https://raw.githubusercontent.com/afirth/cert-manager-issuers/master/
+$ helm install --name my-release \
+--set ingressShim.defaultIssuerName=letsencrypt-prod,ingressShim.defaultIssuerKind=ClusterIssuer \
+stable/cert-manager
 ```
 
-## TODO
+Then install this chart with the default values.yaml and your email address:
 
-move this to a `charts` repo and host the repo on github pages, or get it into incubator
+```
+$ helm install --name my-release \
+-f values.yaml \
+--set email=<you@example.com> \
+incubator/cert-manager-issuers
+```
+
+## Values
+
+## FAQ
+
+### Why isn't this chart part of cert-manager?
+
+Due to technical limitations of helm v2, custom resource definitions must be created before a custom resource can be defined. This means that no issuers are included in the [cert-manager helm chart](https://github.com/helm/charts/tree/master/stable/cert-manager), as they would fail to create.
+
+## Stability
+
+This chart is in alpha. Backwards incompatible changes will be avoided if possible, but no guarantees.
+It's likely that this chart won't be needed after helm v3 is released.
 
 ## Contributing
 
-PRs are welcome.
+PRs are welcome, especially to support more functionality.
