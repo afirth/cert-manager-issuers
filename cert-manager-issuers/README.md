@@ -5,6 +5,7 @@
 To setup the [letsencrypt](https://letsencrypt.org/) staging and prod http01 ACME endpoints as ClusterIssuers (so you can use the kube-lego style ingress annotation `kubernetes.io/tls-acme: "true"`):
 
 ### Install cert-manager
+
 First install the [cert-manager chart](https://github.com/helm/charts/tree/master/stable/cert-manager) with the ingress shim set up:
 
 ```
